@@ -1,13 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowLeft, Network, GitBranch, Boxes, Link2, MessageSquare } from "lucide-react";
+import { ArrowLeft, Network, GitBranch, Boxes, Link2, MessageSquare, Maximize2 } from "lucide-react";
 import { ConceptGraph } from "@/components/ConceptGraph";
 import { NODES, EDGES } from "@/lib/graph-data";
 import { CATEGORY_COLORS, CATEGORY_LABELS } from "@/types/graph";
 import type { ConceptCategory } from "@/types/graph";
+import { useState } from "react";
 
 export default function GraphPage() {
+  const [isFullscreen, setIsFullscreen] = useState(false);
+
   const categoryCounts = NODES.reduce(
     (acc, n) => {
       acc[n.category] = (acc[n.category] || 0) + 1;
@@ -15,6 +18,32 @@ export default function GraphPage() {
     },
     {} as Record<string, number>,
   );
+
+  const edgeTypeCounts = EDGES.reduce(
+    (acc, e) => {
+      acc[e.type] = (acc[e.type] || 0) + 1;
+      return acc;
+    },
+    {} as Record<string, number>,
+  );
+
+  if (isFullscreen) {
+    return (
+      <div className="fixed inset-0 z-50 bg-[#0a0a0f] text-[#e5e7eb]">
+        <div className="absolute top-4 right-4 z-10">
+          <button
+            onClick={() => setIsFullscreen(false)}
+            className="bg-[#111118] border border-[#1e1e2e] rounded-lg px-3 py-1.5 text-xs text-[#6b7280] hover:text-white hover:border-[#2a2a3e] transition-colors font-mono"
+          >
+            Exit Fullscreen
+          </button>
+        </div>
+        <div className="p-4 h-full">
+          <ConceptGraph nodes={NODES} edges={EDGES} width={2200} height={1500} />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#0a0a0f] text-[#e5e7eb]">
@@ -30,6 +59,15 @@ export default function GraphPage() {
           </span>
         </Link>
         <div className="flex items-center gap-4">
+          <button
+            onClick={() => setIsFullscreen(true)}
+            className="flex items-center gap-1.5 text-[#6b7280] hover:text-white transition-colors"
+          >
+            <Maximize2 className="w-3.5 h-3.5" />
+            <span className="font-mono text-xs uppercase tracking-widest hidden sm:inline">
+              Fullscreen
+            </span>
+          </button>
           <Link
             href="/ask"
             className="flex items-center gap-1.5 text-[#6b7280] hover:text-white transition-colors"
@@ -43,8 +81,8 @@ export default function GraphPage() {
       </nav>
 
       {/* Stats */}
-      <div className="px-6 md:px-8 py-6 border-b border-[#1e1e2e]">
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+      <div className="px-6 md:px-8 py-5 border-b border-[#1e1e2e]">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           <StatCard
             icon={<Boxes className="w-4 h-4 text-[#00d4aa]" />}
             label="Concepts"
@@ -72,26 +110,8 @@ export default function GraphPage() {
       </div>
 
       {/* Graph */}
-      <div className="px-6 md:px-8 py-6">
+      <div className="px-4 md:px-6 py-4">
         <ConceptGraph nodes={NODES} edges={EDGES} />
-      </div>
-
-      {/* Legend */}
-      <div className="px-6 md:px-8 py-6 border-t border-[#1e1e2e]">
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 text-xs">
-          {(Object.keys(CATEGORY_COLORS) as ConceptCategory[]).map((cat) => (
-            <div key={cat} className="flex items-center gap-2">
-              <span
-                className="w-3 h-3 rounded-full flex-shrink-0"
-                style={{ backgroundColor: CATEGORY_COLORS[cat] }}
-              />
-              <div>
-                <div className="text-[#e5e7eb]">{CATEGORY_LABELS[cat]}</div>
-                <div className="text-[#6b7280]">{categoryCounts[cat] ?? 0} nodes</div>
-              </div>
-            </div>
-          ))}
-        </div>
       </div>
     </div>
   );
@@ -107,14 +127,14 @@ function StatCard({
   value: number | string;
 }) {
   return (
-    <div className="bg-[#111118] border border-[#1e1e2e] rounded-lg p-4">
-      <div className="flex items-center gap-2 mb-2">
+    <div className="bg-[#111118] border border-[#1e1e2e] rounded-lg p-3">
+      <div className="flex items-center gap-2 mb-1">
         {icon}
-        <span className="text-xs text-[#6b7280] font-mono uppercase tracking-wider">
+        <span className="text-[10px] text-[#6b7280] font-mono uppercase tracking-widest">
           {label}
         </span>
       </div>
-      <div className="text-2xl font-mono font-medium">{value}</div>
+      <div className="text-xl font-mono font-medium">{value}</div>
     </div>
   );
 }
