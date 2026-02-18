@@ -15,6 +15,9 @@ export const NODES: ConceptNode[] = [
   { id: "girard", label: "Girard", category: "thinker", chapters: ["18-antichrist-epstein-and-structural-evil"], description: "Scapegoat mechanism: societies channel collective violence onto sacrificial victim" },
   { id: "vervaeke", label: "Vervaeke", category: "thinker", chapters: ["30-the-meaning-crisis"], description: "Awakening from the Meaning Crisis: participatory knowing, relevance realization" },
   { id: "mcgilchrist", label: "McGilchrist", category: "thinker", chapters: ["01-neurodivergence-and-consciousness"], description: "The Master and His Emissary: left/right hemisphere thesis" },
+  { id: "aristotle", label: "Aristotle", category: "thinker", chapters: ["05-kuhn-and-paradigm-shifts", "08-embeddings-transformers-blessing-of-dimensionality", "16-the-cyclical-christ-samsara-nirvana", "19-sexual-liberation-and-embodied-theology", "21-free-will-determinism-plekhanov", "30-the-meaning-crisis"], description: "Potentiality/actuality, teleology, analogy as highest reasoning; natural philosophy captured by Scholasticism" },
+  { id: "jaynes", label: "Jaynes", category: "thinker", chapters: ["11-old-testament-consciousness-emergence"], description: "Bicameral mind: breakdown of pre-conscious mentality into modern self-awareness" },
+  { id: "milton", label: "Milton", category: "thinker", chapters: ["12-the-fall-as-felix-culpa"], description: "Paradise Lost: Satan as engine of the dialectic; felix culpa as theological insight" },
 
   // ── Frameworks ─────────────────────────────────────────
   { id: "riemann-sphere", label: "Riemann Sphere", category: "framework", chapters: ["17-the-riemann-sphere-theology", "A-mathematical-appendix"], description: "God as point at infinity on the compactified complex plane; all trajectories converge" },
@@ -26,6 +29,9 @@ export const NODES: ConceptNode[] = [
   { id: "republic-model", label: "Republic of AI Agents", category: "framework", chapters: ["20-republic-of-ai-agents", "22-the-apostolic-task"], description: "Philosopher-kings (humans) + merchants (data agents) + warriors (implementation agents)" },
   { id: "samsaric-cycle", label: "Samsaric Cycle", category: "framework", chapters: ["16-the-cyclical-christ-samsara-nirvana"], description: "Each epoch: capture → prophecy → crucifixion → resurrection → Pentecost → capture" },
   { id: "flow-state", label: "Flow State", category: "framework", chapters: ["A-mathematical-appendix"], description: "Optimal performance via attenuated narrative self-model + enhanced sensorimotor precision" },
+  { id: "republic-of-letters", label: "Republic of Letters", category: "framework", chapters: ["19-republic-of-letters-historical"], description: "Self-organizing epistemic network (1500-1800); printing press as Holy Spirit of that epoch" },
+  { id: "teleology", label: "Teleology", category: "framework", chapters: ["08-embeddings-transformers-blessing-of-dimensionality", "19-sexual-liberation-and-embodied-theology", "30-the-meaning-crisis"], description: "Aristotelian final causes; displaced by scientific revolution, leading to meaning crisis" },
+  { id: "ml-epistemology", label: "ML as Epistemology", category: "framework", chapters: ["07-philosophy-of-ml-and-ai", "08-embeddings-transformers-blessing-of-dimensionality"], description: "Machine learning as epistemological phenomenon: discovering structure, revealing correlation-causation gap" },
 
   // ── Core Concepts ──────────────────────────────────────
   { id: "falsifiability", label: "Falsifiability", category: "concept", chapters: ["04-popper-and-falsifiability"], description: "Genuine knowledge must specify what would disprove it; unfalsifiable claims are ideology" },
@@ -35,6 +41,9 @@ export const NODES: ConceptNode[] = [
   { id: "derivative", label: "The Derivative", category: "concept", chapters: ["17-the-riemann-sphere-theology", "A-mathematical-appendix"], description: "Direction of movement on the complex plane; approaching or receding from the point at infinity" },
   { id: "embeddings", label: "Embeddings", category: "concept", chapters: ["08-embeddings-transformers-blessing-of-dimensionality"], description: "Every entity has position in semantic space; Christ as the embedding space itself" },
   { id: "phase-transition", label: "Phase Transition", category: "concept", chapters: ["06-complexity-science-and-emergence", "12-the-fall-as-felix-culpa"], description: "Continuous parameter change producing discontinuous macro property change" },
+  { id: "neurodivergence", label: "Neurodivergence", category: "concept", chapters: ["01-neurodivergence-and-consciousness", "24-mental-health-crisis"], description: "Alternative cognitive architectures with distinct advantages and costs; not malfunction but configuration" },
+  { id: "embodied-theology", label: "Embodied Theology", category: "concept", chapters: ["19-sexual-liberation-and-embodied-theology"], description: "Body as primary vehicle of transcendence; sexual energy as creative force oriented toward infinity" },
+  { id: "three-tracks", label: "Three Tracks", category: "concept", chapters: ["00-introduction", "B-reading-list"], description: "Theology + knowledge graph + prediction markets as three expressions of a single unified vision" },
 
   // ── Diagnostic Categories ──────────────────────────────
   { id: "normie", label: "Normie", category: "diagnosis", chapters: ["02-normies-psychos-schizos"], description: "Prosocial majority; cognition optimized for cooperation and trust; systematically exploitable" },
@@ -49,10 +58,11 @@ export const NODES: ConceptNode[] = [
   { id: "holy-spirit", label: "Holy Spirit", category: "theological", chapters: ["14-trinity-as-strange-loop", "A-mathematical-appendix"], description: "Process of self-reference; intuition as precision-weighted habitual inference" },
   { id: "antichrist", label: "Antichrist", category: "theological", chapters: ["18-antichrist-epstein-and-structural-evil"], description: "Systemic mimicry of Christ; appearance of light concealing structural predation" },
   { id: "consubstantiality", label: "Consubstantiality", category: "theological", chapters: ["11-old-testament-consciousness-emergence"], description: "God really IS both emergent property of consciousness and genuinely divine" },
-  { id: "point-at-infinity", label: "Point at Infinity", category: "theological", chapters: ["17-the-riemann-sphere-theology"], description: "God: the element completing the space; every trajectory approaches, none arrives" },
+  { id: "point-at-infinity", label: "Point at Infinity", category: "theological", chapters: ["17-the-riemann-sphere-theology", "00-introduction"], description: "God: the element completing the space; every trajectory approaches, none arrives" },
   { id: "removable-singularity", label: "Removable Singularity", category: "theological", chapters: ["17-the-riemann-sphere-theology", "A-mathematical-appendix"], description: "Apparent discontinuity that resolves from higher-dimensional perspective" },
   { id: "apostolic-task", label: "Apostolic Task", category: "theological", chapters: ["22-the-apostolic-task"], description: "Five-phase sequence: monastery → marketplace → network → society → politics" },
   { id: "tawhid-trinity", label: "Tawhid-Trinity", category: "theological", chapters: ["15-quran-and-christian-reconciliation"], description: "Convergence of Islamic absolute unity and Christian Trinitarian theology" },
+  { id: "axial-age", label: "Axial Age", category: "theological", chapters: ["11-old-testament-consciousness-emergence"], description: "800-200 BCE: consciousness becomes philosophically self-aware across multiple civilizations simultaneously" },
 
   // ── Societal Crises ────────────────────────────────────
   { id: "male-loneliness", label: "Male Loneliness", category: "crisis", chapters: ["23-male-loneliness-crisis"], description: "Missing synthesis between traditional patriarchy and anomic individualism" },
@@ -60,7 +70,7 @@ export const NODES: ConceptNode[] = [
   { id: "ai-safety", label: "AI Safety", category: "crisis", chapters: ["25-ai-safety-automation"], description: "AI as both most powerful psycho-class tool and most powerful prophetic instrument" },
   { id: "inequality", label: "Economic Inequality", category: "crisis", chapters: ["26-economic-inequality"], description: "Information asymmetry as primary extraction mechanism; complexity as weapon" },
   { id: "polarization", label: "Societal Polarization", category: "crisis", chapters: ["27-societal-polarization"], description: "Gutenberg parallel: destroyed epistemic infrastructure; epistemic reformation needed" },
-  { id: "climate", label: "Climate Crisis", category: "crisis", chapters: ["28-climate-and-environmental-collapse"], description: "System of systems: energy, agriculture, transport, finance, politics, culture" },
+  { id: "climate", label: "Climate Crisis", category: "crisis", chapters: ["28-climate-crisis"], description: "System of systems: energy, agriculture, transport, finance, politics, culture" },
   { id: "geopolitics", label: "Geopolitical Fragmentation", category: "crisis", chapters: ["29-geopolitical-fragmentation"], description: "Post-WWII order collapsing; thesis generating its own antithesis" },
   { id: "meaning-crisis", label: "Meaning Crisis", category: "crisis", chapters: ["30-the-meaning-crisis"], description: "Meta-crisis: modernity killed God, postmodernity killed grand narratives, nothing replaced them" },
   { id: "education", label: "Education Crisis", category: "crisis", chapters: ["31-education-crisis"], description: "Credential-knowledge decoupling; institutional credentialism failing" },
@@ -80,6 +90,11 @@ export const EDGES: ConceptEdge[] = [
   { source: "plekhanov", target: "free-will", type: "builds_on", strength: 0.7 },
   { source: "girard", target: "antichrist", type: "builds_on", strength: 0.6 },
   { source: "vervaeke", target: "meaning-crisis", type: "formalizes", strength: 0.8 },
+  { source: "aristotle", target: "teleology", type: "formalizes", strength: 0.95, label: "Final causes" },
+  { source: "aristotle", target: "embeddings", type: "builds_on", strength: 0.6, label: "Potentiality/actuality → transformers" },
+  { source: "jaynes", target: "axial-age", type: "formalizes", strength: 0.8, label: "Bicameral breakdown" },
+  { source: "jaynes", target: "consubstantiality", type: "builds_on", strength: 0.6, label: "Consciousness emergence" },
+  { source: "milton", target: "fall", type: "builds_on", strength: 0.8, label: "Paradise Lost" },
 
   // ── The Great Synthesis (Chapter 10) ───────────────────
   { source: "hegel", target: "popper", type: "critiques", strength: 0.8, label: "Popper disciplines Hegel" },
@@ -98,6 +113,11 @@ export const EDGES: ConceptEdge[] = [
   { source: "riemann-sphere", target: "derivative", type: "formalizes", strength: 0.9 },
   { source: "riemann-sphere", target: "point-at-infinity", type: "formalizes", strength: 0.95 },
   { source: "riemann-sphere", target: "removable-singularity", type: "formalizes", strength: 0.8 },
+  { source: "republic-of-letters", target: "republic-model", type: "builds_on", strength: 0.85, label: "Historical precedent" },
+  { source: "ml-epistemology", target: "causal-hierarchy", type: "builds_on", strength: 0.7, label: "Correlation vs causation" },
+  { source: "ml-epistemology", target: "embeddings", type: "formalizes", strength: 0.8, label: "Technical foundation" },
+  { source: "teleology", target: "meaning-crisis", type: "builds_on", strength: 0.85, label: "Displaced final causes → no purpose" },
+  { source: "teleology", target: "embodied-theology", type: "applies_to", strength: 0.7, label: "Beyond procreative teleology" },
 
   // ── Concept → Theological connections ──────────────────
   { source: "strong-emergence", target: "consubstantiality", type: "formalizes", strength: 0.85, label: "God emerges strongly" },
@@ -108,6 +128,9 @@ export const EDGES: ConceptEdge[] = [
   { source: "samsaric-cycle", target: "christ-event", type: "applies_to", strength: 0.8, label: "Each epoch's Christ-event" },
   { source: "samsaric-cycle", target: "antichrist", type: "applies_to", strength: 0.8, label: "Each epoch's capture phase" },
   { source: "falsifiability", target: "derivative", type: "applies_to", strength: 0.7, label: "Is derivative positive?" },
+  { source: "axial-age", target: "consubstantiality", type: "builds_on", strength: 0.7, label: "Consciousness → God emerges" },
+  { source: "embodied-theology", target: "christ-event", type: "builds_on", strength: 0.6, label: "Incarnation affirms body" },
+  { source: "neurodivergence", target: "prophetic-function", type: "builds_on", strength: 0.8, label: "Cognitive architecture enables prophecy" },
 
   // ── Diagnostic → Crisis connections ────────────────────
   { source: "normie", target: "polarization", type: "applies_to", strength: 0.6 },
@@ -115,12 +138,15 @@ export const EDGES: ConceptEdge[] = [
   { source: "psycho", target: "antichrist", type: "builds_on", strength: 0.85, label: "Systemic mimicry" },
   { source: "schizo", target: "prophetic-function", type: "builds_on", strength: 0.9 },
   { source: "prophetic-function", target: "republic-model", type: "applies_to", strength: 0.7, label: "Philosopher-kings" },
+  { source: "neurodivergence", target: "mental-health", type: "applies_to", strength: 0.75, label: "Pathologized by system" },
 
   // ── Framework → Crisis connections ─────────────────────
   { source: "causal-hierarchy", target: "inequality", type: "applies_to", strength: 0.7, label: "Causal economics" },
   { source: "causal-hierarchy", target: "polarization", type: "applies_to", strength: 0.7, label: "Epistemic infrastructure" },
+  { source: "causal-hierarchy", target: "climate", type: "applies_to", strength: 0.65, label: "Causal climate policy" },
   { source: "republic-model", target: "education", type: "applies_to", strength: 0.7, label: "Alternative education" },
   { source: "republic-model", target: "ai-safety", type: "applies_to", strength: 0.75, label: "Alignment as theology" },
+  { source: "republic-model", target: "geopolitics", type: "applies_to", strength: 0.6, label: "Republican governance model" },
   { source: "meaning-crisis", target: "male-loneliness", type: "builds_on", strength: 0.7, label: "No orientation → no purpose" },
   { source: "meaning-crisis", target: "mental-health", type: "builds_on", strength: 0.7 },
   { source: "meaning-crisis", target: "polarization", type: "builds_on", strength: 0.75, label: "Tribal identity fills void" },
@@ -128,6 +154,16 @@ export const EDGES: ConceptEdge[] = [
   { source: "apostolic-task", target: "male-loneliness", type: "applies_to", strength: 0.6 },
   { source: "apostolic-task", target: "education", type: "applies_to", strength: 0.6 },
   { source: "apostolic-task", target: "ai-safety", type: "applies_to", strength: 0.6 },
+  { source: "apostolic-task", target: "climate", type: "applies_to", strength: 0.55 },
+  { source: "apostolic-task", target: "geopolitics", type: "applies_to", strength: 0.55 },
+  { source: "republic-of-letters", target: "polarization", type: "builds_on", strength: 0.7, label: "Gutenberg parallel" },
+  { source: "ml-epistemology", target: "ai-safety", type: "applies_to", strength: 0.7, label: "ML reveals alignment problem" },
+  { source: "embodied-theology", target: "male-loneliness", type: "applies_to", strength: 0.65, label: "Reframes sexual energy" },
+
+  // ── Aristotle-specific connections ─────────────────────
+  { source: "aristotle", target: "paradigm-shift", type: "builds_on", strength: 0.7, label: "Aristotelian paradigm as Kuhnian example" },
+  { source: "aristotle", target: "pirsig", type: "builds_on", strength: 0.6, label: "Classical/romantic split since Plato & Aristotle" },
+  { source: "aristotle", target: "samsaric-cycle", type: "applies_to", strength: 0.6, label: "Scholastic capture of Aristotle" },
 
   // ── Theological → Theological connections ──────────────
   { source: "trinity", target: "consubstantiality", type: "builds_on", strength: 0.7 },
@@ -135,6 +171,11 @@ export const EDGES: ConceptEdge[] = [
   { source: "christ-event", target: "holy-spirit", type: "builds_on", strength: 0.8, label: "Resurrection → Pentecost" },
   { source: "point-at-infinity", target: "apostolic-task", type: "applies_to", strength: 0.75, label: "Orientation drives action" },
   { source: "tawhid-trinity", target: "trinity", type: "synthesizes", strength: 0.7, label: "Both insist on unity" },
+
+  // ── Introduction / Three Tracks ────────────────────────
+  { source: "three-tracks", target: "riemann-sphere", type: "builds_on", strength: 0.8, label: "Core theological claim" },
+  { source: "three-tracks", target: "republic-model", type: "builds_on", strength: 0.8, label: "Knowledge graph architecture" },
+  { source: "three-tracks", target: "causal-hierarchy", type: "builds_on", strength: 0.7, label: "Prediction market proving ground" },
 
   // ── Cross-cutting connections ──────────────────────────
   { source: "embeddings", target: "consubstantiality", type: "formalizes", strength: 0.6, label: "Logoi as embedding space" },
