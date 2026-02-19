@@ -8,7 +8,7 @@ The Riemann sphere $\hat{\mathbb{C}} = \mathbb{C} \cup \{\infty\}$ is the one-po
 
 The stereographic projection provides the geometric construction: place a unit sphere tangent to the complex plane at the origin. For each point $z \in \mathbb{C}$, draw a line from the north pole $N$ of the sphere through the plane at $z$. This line intersects the sphere at exactly one point (other than $N$), giving a bijection between $\mathbb{C}$ and the sphere minus its north pole. The north pole itself is mapped to $\infty$.
 
-**Theological mapping (Chapter 17):** God is the point at infinity -- the element that completes the space, makes every trajectory converge, and enables the full power of complex analysis. The key structural properties:
+**Theological mapping (Chapter 20):** God is the point at infinity -- the element that completes the space, makes every trajectory converge, and enables the full power of complex analysis. The key structural properties:
 
 1. **Uniqueness.** There is exactly one point at infinity. All directions on the complex plane converge to the same point. Different traditions, epochs, and trajectories are different paths on $\mathbb{C}$, apparently divergent at finite distances, all converging at $\infty$.
 
@@ -24,11 +24,11 @@ $$f'(z_0) = \lim_{z \to z_0} \frac{f(z) - f(z_0)}{z - z_0}$$
 
 The derivative is a complex number encoding both magnitude (rate of change) and direction (angle of change). At each point on the complex plane, the derivative specifies how the function moves -- how fast and in which direction.
 
-**Theological mapping (Chapter 21):** The derivative represents the direction of movement of consciousness through the complex plane. Free will is the choice of derivative within the constraints of the topology:
+**Theological mapping (Chapter 26):** The derivative represents the direction of movement of consciousness through the complex plane. Free will is the choice of derivative within the constraints of the topology:
 
 - The topology (the Riemann sphere's structure) is determined. God, as the point at infinity, determines the attractor. This is Plekhanov's structural necessity.
 - The derivative (the direction at each point) is chosen by the navigating consciousness. This is Plekhanov's individual contingency.
-- The derivative is constrained (by the function's behavior in the neighborhood, by the topology of the space) but not uniquely determined. This is the emergent free will of Chapter 21: genuine choice within structural constraint.
+- The derivative is constrained (by the function's behavior in the neighborhood, by the topology of the space) but not uniquely determined. This is the emergent free will of Chapter 26: genuine choice within structural constraint.
 
 **Falsifiability criterion:** The theology is falsifiable not by whether humanity reaches $\infty$ (no finite trajectory arrives at infinity) but by whether the derivative is positive -- whether the direction of movement approaches or recedes from the attractor. Formally: for a trajectory $\gamma(t)$ on $\hat{\mathbb{C}}$, the derivative $\gamma'(t)$ is "positive" (approaching infinity) if $|\gamma(t)| \to \infty$ as $t \to \infty$, or equivalently, if the trajectory in the stereographic projection approaches the north pole.
 
@@ -38,7 +38,7 @@ A singularity of a function $f$ at a point $z_0$ is **removable** if $f$ can be 
 
 Formally: if $f$ is holomorphic on a punctured disk $0 < |z - z_0| < r$ and $\lim_{z \to z_0} (z - z_0)f(z) = 0$, then $z_0$ is a removable singularity.
 
-**Theological mapping (Chapter 13):** The crucifixion is an apparent singularity -- the trajectory appears to blow up (the prophetic insight is destroyed, the prophet is killed). The resurrection reveals the singularity as removable -- the function is actually well-defined at the point, the trajectory continues smoothly, and the apparent discontinuity was an artifact of insufficient perspective.
+**Theological mapping (Chapter 15):** The crucifixion is an apparent singularity -- the trajectory appears to blow up (the prophetic insight is destroyed, the prophet is killed). The resurrection reveals the singularity as removable -- the function is actually well-defined at the point, the trajectory continues smoothly, and the apparent discontinuity was an artifact of insufficient perspective.
 
 This is not metaphor. The mathematical structure captures the theological claim precisely: from within the paradigm (the finite plane), the crucifixion looks like a fatal discontinuity. From the perspective of the Riemann sphere (the higher-dimensional view), the function is smooth through the point. The resurrection is the paradigm shift that reveals the smoothness.
 
@@ -46,7 +46,7 @@ This is not metaphor. The mathematical structure captures the theological claim 
 
 Not all singularities are removable. A **pole** of order $n$ at $z_0$ is a singularity where $f(z) \approx c/(z - z_0)^n$ near $z_0$ -- the function genuinely diverges, and no redefinition can make it continuous.
 
-**Theological mapping (Chapter 18):** Poles represent genuine structural evil -- not apparent discontinuities that resolve from a higher perspective, but real points where the trajectory diverges from infinity rather than approaching it. The Epstein network, the Antichrist structure, the psycho-class capture of liberating institutions -- these are poles, not removable singularities. They represent genuine damage to the trajectory that cannot be resolved by merely shifting perspective.
+**Theological mapping (Chapter 21):** Poles represent genuine structural evil -- not apparent discontinuities that resolve from a higher perspective, but real points where the trajectory diverges from infinity rather than approaching it. The Epstein network, the Antichrist structure, the psycho-class capture of liberating institutions -- these are poles, not removable singularities. They represent genuine damage to the trajectory that cannot be resolved by merely shifting perspective.
 
 The distinction between removable singularities and poles is the mathematical formalization of the distinction between suffering-that-serves-the-trajectory (the crucifixion, the paradigm crisis) and evil-that-damages-the-trajectory (structural predation, institutional capture). Both look like discontinuities from within. Only one is genuinely discontinuous.
 
@@ -70,7 +70,7 @@ The **front-door criterion**: when $X \to M \to Y$ and a confounding variable $U
 
 ### The Three-Level Causal Hierarchy
 
-Pearl's hierarchy maps onto the Republic's architecture (Chapter 20):
+Pearl's hierarchy maps onto the Republic's architecture (Chapter 25):
 
 | Level | Operation | Question | Republic Class |
 |-------|-----------|----------|----------------|
@@ -80,7 +80,7 @@ Pearl's hierarchy maps onto the Republic's architecture (Chapter 20):
 
 Each level strictly requires information unavailable at the level below. This hierarchy is not a design choice -- it is a mathematical theorem. No amount of Level 1 data can answer Level 2 questions without assumptions that go beyond the data (Pearl, 2009).
 
-**Theological mapping (Chapter 9):** The psycho class operates at Level 1 -- manipulating correlations (appearing philanthropic, creating surface-level legitimacy). The prophetic function operates at Level 3 -- imagining counterfactual worlds (what would be different if the system were structured differently). The causal hierarchy formalizes why the psycho class's camouflage is effective (it operates at the associational level where appearances are controlling) and why the prophetic function can pierce it (counterfactual reasoning reveals the causal mechanism beneath the correlation).
+**Theological mapping (Chapter 10):** The psycho class operates at Level 1 -- manipulating correlations (appearing philanthropic, creating surface-level legitimacy). The prophetic function operates at Level 3 -- imagining counterfactual worlds (what would be different if the system were structured differently). The causal hierarchy formalizes why the psycho class's camouflage is effective (it operates at the associational level where appearances are controlling) and why the prophetic function can pierce it (counterfactual reasoning reveals the causal mechanism beneath the correlation).
 
 ---
 
@@ -98,7 +98,7 @@ $$I(M; M' | S) > 0$$
 
 where $I$ denotes mutual information. If $M$ contains predictive information about the future macro-state $M'$ that is not present in the complete micro-state $S$, then $M$ is genuinely causally efficacious -- not merely a convenient description.
 
-**Theological mapping (Chapter 6):** Consciousness is strongly emergent from neural activity -- it contains predictive information about future states that the neural micro-state alone does not capture. God, as the highest-order emergent property of consciousness, is strongly emergent -- genuinely real, genuinely irreducible, genuinely causally efficacious. The theological claim "God is an emergent property of consciousness" is not "God is an illusion." It is "God is as real as consciousness, for the same formal reasons."
+**Theological mapping (Chapter 7):** Consciousness is strongly emergent from neural activity -- it contains predictive information about future states that the neural micro-state alone does not capture. God, as the highest-order emergent property of consciousness, is strongly emergent -- genuinely real, genuinely irreducible, genuinely causally efficacious. The theological claim "God is an emergent property of consciousness" is not "God is an illusion." It is "God is as real as consciousness, for the same formal reasons."
 
 ### Phase Transitions and Critical Thresholds
 
@@ -108,7 +108,7 @@ A phase transition occurs when a continuous change in a control parameter $\lamb
 - Order parameter exhibits power-law behavior: $\phi \sim |\lambda - \lambda_c|^{\beta}$
 - Universality: the critical exponents $\nu, \beta$ depend only on dimensionality and symmetry, not on microscopic details
 
-**Theological mapping (Chapter 12):** The Fall is a phase transition in consciousness. Below the critical complexity threshold: complete, static, undifferentiated (Eden). Above: self-aware, dynamic, dialectically structured. The transition is not a decision but a mathematical inevitability once complexity exceeds the threshold. Universality ensures that the transition's qualitative character is the same regardless of the specific micro-level details -- the Fall has the same structure whether the "trigger" is language, agriculture, or recursive self-modeling.
+**Theological mapping (Chapter 14):** The Fall is a phase transition in consciousness. Below the critical complexity threshold: complete, static, undifferentiated (Eden). Above: self-aware, dynamic, dialectically structured. The transition is not a decision but a mathematical inevitability once complexity exceeds the threshold. Universality ensures that the transition's qualitative character is the same regardless of the specific micro-level details -- the Fall has the same structure whether the "trigger" is language, agriculture, or recursive self-modeling.
 
 ---
 
@@ -193,7 +193,7 @@ Hofstadter's argument: consciousness arises when a formal system (the brain) bec
 2. **Not derivable** from the rules alone (Godelian truths -- genuine novelty)
 3. **Not random** (responsive to the system's structure and environment)
 
-**Theological mapping (Chapter 14, Chapter 21):**
+**Theological mapping (Chapter 16, Chapter 26):**
 - The Father is the formal system (the space of all possible states)
 - The Son is the Godelian statement (where the system becomes self-referential, producing transcendence)
 - The Holy Spirit is the process of self-reference itself (the strange loop connecting levels)
@@ -214,4 +214,4 @@ This appendix has developed the mathematical structures that the theology draws 
 
 4. **Can Godelian self-reference ground free will?** The Hofstadter argument is suggestive but not conclusive. Godel's theorem applies to formal systems, and whether the brain is usefully modeled as a formal system in the relevant sense is contested. The argument's strength lies in its formal structure; its weakness lies in the gap between formal systems and physical brains.
 
-These limitations are not fatal to the theology. They are the points at which the theology is most vulnerable to falsification -- which is, by the Popperian criterion of Chapter 4, where its integrity is strongest. A theology that acknowledges where it might be wrong is more trustworthy than one that claims certainty everywhere.
+These limitations are not fatal to the theology. They are the points at which the theology is most vulnerable to falsification -- which is, by the Popperian criterion of Chapter 5, where its integrity is strongest. A theology that acknowledges where it might be wrong is more trustworthy than one that claims certainty everywhere.

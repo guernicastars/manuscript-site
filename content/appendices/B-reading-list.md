@@ -215,3 +215,142 @@ Organized by chapter, with brief annotations indicating how each source contribu
 - **Godel, Kurt.** "On Formally Undecidable Propositions of Principia Mathematica and Related Systems" (1931).
 - **Penrose, Roger.** *The Emperor's New Mind* (1989). Consciousness, physics, and the limits of computation.
 - **Friston, Karl.** "A Free Energy Principle for the Brain" (2006). *Journal of Physiology - Paris*.
+
+---
+
+## New Chapters (Part 1, Part 2, Part 3 additions)
+
+### Chapter 4: The Psychoanalytic Tradition
+- **Freud, Sigmund.** *The Interpretation of Dreams* (1900). The unconscious as generating mechanism of conscious experience.
+- **Freud, Sigmund.** *Beyond the Pleasure Principle* (1920). The death drive, repetition compulsion, and the samsaric cycle at individual scale.
+- **Jung, Carl.** *Man and His Symbols* (1964). Accessible introduction to Jungian archetypes and the collective unconscious.
+- **Jung, Carl.** *Aion: Researches into the Phenomenology of the Self* (1951). The Self archetype and individuation.
+- **Jung, Carl.** *Answer to Job* (1952). God's psychological development -- the most theologically provocative Jungian text.
+- **Jung, Carl.** *The Red Book* (Liber Novus) (2009). Jung's own active imagination dialogues.
+- **Adler, Alfred.** *Understanding Human Nature* (1927). Inferiority, compensation, and Gemeinschaftsgefuhl.
+- **Adler, Alfred.** *What Life Could Mean to You* (1931). Applied individual psychology.
+- **Perls, Fritz.** *Gestalt Therapy: Excitement and Growth in the Human Personality* (1951). The paradoxical theory of change and contact as curative process.
+- **Perls, Fritz.** *In and Out the Garbage Pail* (1969). Gestalt autobiography demonstrating the method.
+- **Beck, Aaron.** *Cognitive Therapy and the Emotional Disorders* (1976). The founding text of CBT.
+- **Linehan, Marsha.** *DBT Skills Training Manual* (2nd ed., 2015). Dialectical behavior therapy as applied Hegelian practice.
+- **Schwartz, Richard.** *Internal Family Systems Therapy* (1995). The psyche as republic of sub-personalities.
+- **Hayes, Steven.** *Get Out of Your Mind and Into Your Life* (2005). ACT: defusion, values, and committed action.
+
+### Chapter 12: Contemporary Intellectual Movements
+- **Yudkowsky, Eliezer.** *Rationality: From AI to Zombies* (2015). The LessWrong rationality canon.
+- **Alexander, Scott.** "Meditations on Moloch" (2014). Coordination failure as the engine of civilizational catastrophe.
+- **MacAskill, William.** *What We Owe the Future* (2022). The case for longtermism.
+- **Singer, Peter.** *The Life You Can Save* (2009). Foundational EA argument.
+- **Kahneman, Daniel.** *Thinking, Fast and Slow* (2011). System 1/System 2 and the cognitive bias catalog.
+- **Thaler, Richard and Sunstein, Cass.** *Nudge* (2008). Choice architecture and libertarian paternalism.
+- **Ariely, Dan.** *Predictably Irrational* (2008). Systematic patterns in human decision-making errors.
+- **Hayek, Friedrich.** "The Use of Knowledge in Society" (1945). The information argument against central planning.
+- **Acemoglu, Daron and Robinson, James.** *Why Nations Fail* (2012). Inclusive vs. extractive institutions.
+- **Arthur, W. Brian.** *Complexity and the Economy* (2015). Increasing returns and path dependence.
+- **Collison, Patrick and Cowen, Tyler.** "We Need a New Science of Progress" (2019). *The Atlantic*. Progress studies founding manifesto.
+- **Cowen, Tyler.** *The Great Stagnation* (2011). Exhaustion of low-hanging fruit in innovation.
+
+### Chapter 18: All Trajectories Converge -- World Wisdom Traditions
+
+**Hinduism:**
+- **Upanishads** (Eknath Easwaran translation recommended). Brahman-Atman identity and the Turiya state.
+- **Bhagavad Gita** (multiple translations: Easwaran for accessibility, Ganesh Vasudev Tagare for scholarly depth). Nishkama karma and the apostolic dilemma.
+- **Patanjali.** *Yoga Sutras* (trans. with commentary by Georg Feuerstein or B.K.S. Iyengar). Eight limbs as epistemic practice.
+
+**Buddhism:**
+- **Thich Nhat Hanh.** *The Heart of the Buddha's Teaching* (1998). Comprehensive introduction to Buddhist thought and practice.
+- **Suzuki, Shunryu.** *Zen Mind, Beginner's Mind* (1970). Zen practice and the capacity to hold paradox.
+- **Dogen.** *Shobogenzo* (selected fascicles). Zen master's philosophical-literary masterwork.
+- **Nagarjuna.** *Mulamadhyamakakarika* (Fundamental Verses on the Middle Way). The philosophy of emptiness (sunyata).
+
+**Taoism:**
+- **Lao Tzu.** *Tao Te Ching* (Stephen Mitchell translation for poetry, D.C. Lau for accuracy). Wu wei and the Godelian argument in five words.
+- **Zhuangzi** (Burton Watson translation). The butterfly dream and the relativity of perspectives.
+- **I Ching** (Wilhelm/Baynes translation). Three-thousand-year-old system for navigating change.
+
+**Islamic intellectual tradition:**
+- **Ibn Arabi.** *Fusus al-Hikam* (Bezels of Wisdom). Wahdat al-wujud and prophetic typology.
+- **Al-Ghazali.** *Deliverance from Error* (al-Munqidh min al-Dalal). The Islamic Pirsig's spiritual autobiography.
+- **Al-Ghazali.** *The Incoherence of the Philosophers* (Tahafut al-Falasifah). Critique of pure rationalism.
+- **Rumi.** *Masnavi* (Nicholson or Mojaddedi translations). Riemann sphere theology in verse.
+- **Rumi.** *Divan-e Shams*. The ecstatic poetry of divine love.
+- **Ibn Khaldun.** *Muqaddimah* (1377). The first work of social science; asabiyyah cycles.
+- **Al-Farabi.** *The Political Regime* / *Opinions of the Inhabitants of the Virtuous City*. Islamic political philosophy prefiguring the Republic.
+
+**African philosophy:**
+- **Tempels, Placide.** *Bantu Philosophy* (1945). With critical awareness of colonial framing. Vital force ontology.
+- **Mbiti, John.** *African Religions and Philosophy* (1969). Comprehensive survey of African philosophical traditions.
+- **Wiredu, Kwasi.** *Philosophy and an African Culture* (1980). Akan philosophical thought.
+- **Oyěwùmí, Oyèrónkẹ́.** *The Invention of Women: Making an African Sense of Western Gender Discourses* (1997). Yoruba critique of Western gender categories.
+
+**Indigenous traditions:**
+- **Mann, Charles.** *1491: New Revelations of the Americas Before Columbus* (2005). Pre-Columbian civilizations reconsidered.
+- **Kimmerer, Robin Wall.** *Braiding Sweetgrass* (2013). Indigenous ecological knowledge and reciprocity with the natural world.
+- **Grinde, Donald and Johansen, Bruce.** *Exemplar of Liberty: Native America and the Evolution of Democracy* (1991). Haudenosaunee influence on American democracy.
+- **Cajete, Gregory.** *Native Science: Natural Laws of Interdependence* (2000). Indigenous knowledge systems as legitimate physics.
+
+**Silk Roads and global history:**
+- **Frankopan, Peter.** *The Silk Roads: A New History of the World* (2015). Global history recentered on networks of exchange.
+- **Frankopan, Peter.** *The New Silk Roads* (2018). Contemporary geopolitical realignment.
+- **Abu-Lughod, Janet.** *Before European Hegemony* (1989). The thirteenth-century world system before European dominance.
+- **Hobson, John.** *The Eastern Origins of Western Civilisation* (2004). Challenging Eurocentric narratives of progress.
+
+### Chapter 23: Aesthetics and the Theology of Beauty
+- **Schopenhauer, Arthur.** *The World as Will and Representation*, Book III (1818). Aesthetic experience as epistemology.
+- **Wilde, Oscar.** *The Picture of Dorian Gray* (1890). The aesthetic principle and its Faustian warning.
+- **Wilde, Oscar.** "The Critic as Artist" (1891). The aesthetic faculty as form of intelligence.
+- **Weil, Simone.** *Gravity and Grace* (1947). Gravity (entropy pull) vs. grace (creative force). Attention as spiritual practice.
+- **Weil, Simone.** *Waiting for God* (1950). Decreation, malheur, and the limits of theodicy.
+- **Scarry, Elaine.** *On Beauty and Being Just* (1999). Beauty's relationship to justice and attention.
+
+---
+
+## Part 6: Applied Philosophy
+
+### Chapter 39: Causal Physics
+- **Pearl, Judea.** *Causality* (2009). The foundational reference for all causal case studies.
+- **Hernan, Miguel and Robins, James.** *Causal Inference: What If* (2020). Applied methodology.
+- **Taleb, Nassim.** *Antifragile: Things That Gain from Disorder* (2012). Systems that benefit from stressors.
+
+### Chapter 40: Economics -- The Causal Commons
+- **Aristotle.** *Politics* and *Nicomachean Ethics*. Oikonomia as household management for the good life.
+- **Ostrom, Elinor.** *Governing the Commons* (1990). Institutional solutions to commons dilemmas beyond market and state.
+- **Arthur, W. Brian.** *Complexity and the Economy* (2015). Nonlinear economic dynamics.
+
+### Chapter 41: Rhetoric
+- **Aristotle.** *Rhetoric*. The original framework: logos, ethos, pathos.
+- **McLuhan, Marshall.** *Understanding Media: The Extensions of Man* (1964). The medium is the message.
+- **McLuhan, Marshall.** *The Gutenberg Galaxy* (1962). Print technology and its civilizational consequences.
+
+---
+
+## Tier 1 Thinkers — Comprehensive Works
+
+- **Taleb, Nassim Nicholas.** *Fooled by Randomness* (2001), *The Black Swan* (2007), *Antifragile* (2012), *Skin in the Game* (2018) — the Incerto.
+- **Arendt, Hannah.** *Eichmann in Jerusalem: A Report on the Banality of Evil* (1963), *The Human Condition* (1958), *The Origins of Totalitarianism* (1951).
+- **Weil, Simone.** *Gravity and Grace* (1947), *Waiting for God* (1950), *The Need for Roots* (1949).
+- **Dostoevsky, Fyodor.** *The Brothers Karamazov* (1880), *Notes from Underground* (1864), *The Idiot* (1869), *Demons* (1872).
+- **Nietzsche, Friedrich.** *Thus Spoke Zarathustra* (1883), *Beyond Good and Evil* (1886), *On the Genealogy of Morals* (1887), *The Gay Science* (1882).
+- **Foucault, Michel.** *Discipline and Punish* (1975), *The Order of Things* (1966), *The History of Sexuality, Vol. 1* (1976).
+- **Sartre, Jean-Paul.** *Being and Nothingness* (1943), *Nausea* (1938), *Existentialism Is a Humanism* (1946).
+- **Camus, Albert.** *The Myth of Sisyphus* (1942), *The Rebel* (1951), *The Plague* (1947), *The Stranger* (1942).
+- **De Beauvoir, Simone.** *The Second Sex* (1949), *The Ethics of Ambiguity* (1947).
+- **Heidegger, Martin.** *Being and Time* (1927), *The Question Concerning Technology* (1954). With moral caveat on Nazi involvement.
+
+## Tier 2 Thinkers — Key Works
+
+- **Bateson, Gregory.** *Steps to an Ecology of Mind* (1972).
+- **Girard, Rene.** *Violence and the Sacred* (1972), *Things Hidden Since the Foundation of the World* (1978), *I See Satan Fall Like Lightning* (1999).
+- **Illich, Ivan.** *Deschooling Society* (1971), *Tools for Conviviality* (1973), *Medical Nemesis* (1975).
+- **McLuhan, Marshall.** *Understanding Media* (1964), *The Gutenberg Galaxy* (1962).
+- **Han, Byung-Chul.** *The Burnout Society* (2010), *Psychopolitics* (2017), *The Transparency Society* (2012).
+- **Scott, James C.** *Seeing Like a State* (1998), *Against the Grain* (2017).
+- **Haraway, Donna.** "A Cyborg Manifesto" (1985), *Staying with the Trouble* (2016).
+- **Fanon, Frantz.** *The Wretched of the Earth* (1961), *Black Skin, White Masks* (1952).
+- **Levinas, Emmanuel.** *Totality and Infinity* (1961). Ethics as first philosophy; the Face of the Other.
+- **Solzhenitsyn, Aleksandr.** *The Gulag Archipelago* (1973). Totalitarianism from inside.
+
+## Tier 3 Thinkers — Foundational Additions
+
+- **Spinoza, Baruch.** *Ethics* (1677). Deus sive Natura -- radical immanence three centuries before the torus theology.
+- **Wittgenstein, Ludwig.** *Tractatus Logico-Philosophicus* (1921), *Philosophical Investigations* (1953). Limits of language and meaning as use.

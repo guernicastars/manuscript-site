@@ -31,5 +31,6 @@ export const PARTS: Record<string, PartInfo> = {
   "part3-metaphysics": { number: 3, title: "Metaphysics", slug: "part3-metaphysics" },
   "part4-praxis": { number: 4, title: "Praxis", slug: "part4-praxis" },
   "part5-apostolic-agenda": { number: 5, title: "The Apostolic Agenda", slug: "part5-apostolic-agenda" },
-  appendices: { number: 6, title: "Appendices", slug: "appendices" },
+  "part6-applied-philosophy": { number: 6, title: "Applied Philosophy", slug: "part6-applied-philosophy" },
+  appendices: { number: 7, title: "Appendices", slug: "appendices" },
 };

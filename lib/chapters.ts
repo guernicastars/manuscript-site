@@ -18,15 +18,19 @@ function wordCount(content: string): number {
 }
 
 function parseChapterNumber(filename: string): string {
+  // Special case: critical-interlude sits between Part 2 and Part 3
+  if (filename.startsWith("critical-interlude")) return "CI";
   const match = filename.match(/^(\d+|[A-Z])-/);
   return match ? match[1] : "0";
 }
 
 function sortKey(meta: ChapterMeta): number {
   const n = meta.number;
-  if (n === "A") return 100;
-  if (n === "B") return 101;
-  // Use part number to disambiguate collisions (e.g., two chapter 19s)
+  if (n === "CI") return 250; // Critical Interlude: after Part 2 (200s), before Part 3 (300s)
+  if (n === "A") return 900;
+  if (n === "B") return 901;
+  if (n === "C") return 902;
+  // Use part number to disambiguate collisions
   const partOffset = meta.part ? meta.part.number * 100 : 0;
   return partOffset + parseInt(n, 10);
 }
@@ -86,7 +90,7 @@ export function getTOC(): TOCGroup[] {
   let currentGroup: TOCGroup | null = null;
 
   for (const ch of chapters) {
-    const groupKey = ch.part?.slug ?? (ch.number === "A" || ch.number === "B" ? "appendices" : "intro");
+    const groupKey = ch.part?.slug ?? (ch.number === "A" || ch.number === "B" || ch.number === "C" ? "appendices" : ch.number === "CI" ? "critical-interlude" : "intro");
 
     if (!currentGroup || getGroupKey(currentGroup) !== groupKey) {
       currentGroup = {
@@ -95,7 +99,9 @@ export function getTOC(): TOCGroup[] {
           ? ch.part.slug === "appendices"
             ? "Appendices"
             : `Part ${ch.part.number}: ${ch.part.title}`
-          : "Introduction",
+          : ch.number === "CI"
+            ? "Critical Interlude"
+            : "Introduction",
         chapters: [],
       };
       groups.push(currentGroup);
