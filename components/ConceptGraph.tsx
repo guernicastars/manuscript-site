@@ -12,11 +12,11 @@ import {
   type SimulationLinkDatum,
 } from "d3-force";
 import type { ConceptNode, ConceptEdge, ConceptCategory, EdgeType } from "@/types/graph";
-import { CATEGORY_COLORS, CATEGORY_LABELS, EDGE_TYPE_LABELS } from "@/types/graph";
+import { CATEGORY_COLORS, EDGE_TYPE_LABELS } from "@/types/graph";
 
-const BASE_NODE_RADIUS = 28;
-const MAX_NODE_RADIUS = 52;
-const ARROW_SIZE = 10;
+// ── Polymarket-inspired sizing ──────────────────────────────
+const MIN_NODE_RADIUS = 8;
+const MAX_NODE_RADIUS = 30;
 const MIN_ZOOM = 0.3;
 const MAX_ZOOM = 3;
 
@@ -82,31 +82,11 @@ export function ConceptGraph({
   const transformStart = useRef({ x: 0, y: 0 });
   const [dragNodeId, setDragNodeId] = useState<string | null>(null);
   const dragOffset = useRef({ x: 0, y: 0 });
-  const [animOffset, setAnimOffset] = useState(0);
-  const animRef = useRef<number | null>(null);
-  const lastFrameTime = useRef(0);
 
-  // Keep a ref to the live simulation so drag can reheat it
   const simRef = useRef<Simulation<SimNode, SimLink> | null>(null);
-  // Keep a ref to simNodes array so the tick callback can read the latest positions
   const simNodesRef = useRef<SimNode[]>([]);
 
-  // Edge flow animation
-  useEffect(() => {
-    const animate = (time: number) => {
-      if (time - lastFrameTime.current > 40) {
-        lastFrameTime.current = time;
-        setAnimOffset((prev) => (prev + 1) % 60);
-      }
-      animRef.current = requestAnimationFrame(animate);
-    };
-    animRef.current = requestAnimationFrame(animate);
-    return () => {
-      if (animRef.current) cancelAnimationFrame(animRef.current);
-    };
-  }, []);
-
-  // Degree map for node sizing
+  // Degree map for node sizing (sqrt scaling like Polymarket)
   const degreeMap = useMemo(() => {
     const map = new Map<string, number>();
     for (const e of edges) {
@@ -123,14 +103,12 @@ export function ConceptGraph({
 
   function getNodeRadius(nodeId: string) {
     const deg = degreeMap.get(nodeId) || 1;
-    return BASE_NODE_RADIUS + (deg / maxDegree) * (MAX_NODE_RADIUS - BASE_NODE_RADIUS);
+    return MIN_NODE_RADIUS + (MAX_NODE_RADIUS - MIN_NODE_RADIUS) * Math.sqrt(deg / maxDegree);
   }
 
-  // ── Live d3-force simulation (same pattern as polymarket market-graph.html) ──
+  // ── Force simulation ──────────────────────────────────────
   useEffect(() => {
     if (nodes.length === 0) return;
-
-    // Stop any previous simulation
     if (simRef.current) simRef.current.stop();
 
     const filtered = nodes.filter((n) => enabledCategories.has(n.category));
@@ -139,7 +117,6 @@ export function ConceptGraph({
       (e) => filteredIds.has(e.source) && filteredIds.has(e.target),
     );
 
-    // Build degree map for collision
     const localDegreeMap = new Map<string, number>();
     for (const node of filtered) localDegreeMap.set(node.id, 0);
     for (const edge of filteredEdges) {
@@ -148,11 +125,10 @@ export function ConceptGraph({
     }
     const localMaxDeg = Math.max(...localDegreeMap.values(), 1);
 
-    // All nodes start at center — they'll spring outward
     const newSimNodes: SimNode[] = filtered.map((n) => ({
       ...n,
-      x: width / 2,
-      y: height / 2,
+      x: width / 2 + (Math.random() - 0.5) * 200,
+      y: height / 2 + (Math.random() - 0.5) * 200,
     }));
 
     const simLinks: SimLink[] = filteredEdges.map((e) => ({
@@ -168,39 +144,32 @@ export function ConceptGraph({
         "link",
         forceLink<SimNode, SimLink>(simLinks)
           .id((d) => d.id)
-          // Shorter distances = tighter clusters; strong edges pull very close
-          .distance((d) => Math.max(60, 180 * (1 - d.weight)))
-          // Stronger link force so connected nodes actually cluster
-          .strength((d) => 0.3 + d.weight * 0.6),
+          .distance(150)
+          .strength(0.4),
       )
       .force(
         "charge",
         forceManyBody<SimNode>()
-          // Weaker repulsion lets clusters form; unconnected nodes still separate
-          .strength(-250)
-          // Shorter range — only push away nearby strangers, not the whole graph
-          .distanceMax(350),
+          .strength(-350)
+          .distanceMax(500),
       )
       .force(
         "center",
-        forceCenter<SimNode>(width / 2, height / 2).strength(0.03),
+        forceCenter<SimNode>(width / 2, height / 2).strength(0.05),
       )
       .force(
         "collision",
         forceCollide<SimNode>()
           .radius((d) => {
             const deg = localDegreeMap.get(d.id) ?? 1;
-            const r =
-              BASE_NODE_RADIUS +
-              (deg / localMaxDeg) * (MAX_NODE_RADIUS - BASE_NODE_RADIUS);
-            return r + 8;
+            const r = MIN_NODE_RADIUS + (MAX_NODE_RADIUS - MIN_NODE_RADIUS) * Math.sqrt(deg / localMaxDeg);
+            return r + 10;
           })
-          .strength(0.8),
+          .strength(0.7),
       )
-      .alphaDecay(0.018)
-      .velocityDecay(0.35)
+      .alphaDecay(0.02)
+      .velocityDecay(0.3)
       .on("tick", () => {
-        // Spread a fresh snapshot to React on every tick
         setSimNodes(
           simNodesRef.current.map((sn) => ({
             id: sn.id,
@@ -217,10 +186,7 @@ export function ConceptGraph({
       });
 
     simRef.current = simulation;
-
-    return () => {
-      simulation.stop();
-    };
+    return () => { simulation.stop(); };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [nodes, edges, width, height, enabledCategories]);
 
@@ -283,7 +249,6 @@ export function ConceptGraph({
         const newX = graphX - dragOffset.current.x;
         const newY = graphY - dragOffset.current.y;
 
-        // Pin the dragged node in the live simulation (like polymarket)
         const simNode = simNodesRef.current.find((n) => n.id === dragNodeId);
         if (simNode) {
           simNode.fx = newX;
@@ -310,7 +275,6 @@ export function ConceptGraph({
   );
 
   const handleMouseUp = useCallback(() => {
-    // Release the pinned node so it springs back (like polymarket dragended)
     if (dragNodeId) {
       const simNode = simNodesRef.current.find((n) => n.id === dragNodeId);
       if (simNode) {
@@ -334,11 +298,7 @@ export function ConceptGraph({
       const mouseX = ((e.clientX - rect.left) / rect.width) * width;
       const mouseY = ((e.clientY - rect.top) / rect.height) * height;
       const scaleFactor = e.deltaY < 0 ? 1.08 : 1 / 1.08;
-      const newScale = clamp(
-        viewTransform.scale * scaleFactor,
-        MIN_ZOOM,
-        MAX_ZOOM,
-      );
+      const newScale = clamp(viewTransform.scale * scaleFactor, MIN_ZOOM, MAX_ZOOM);
       const ratio = newScale / viewTransform.scale;
       onViewTransformChange({
         scale: newScale,
@@ -362,7 +322,6 @@ export function ConceptGraph({
       dragOffset.current = { x: graphX - node.x!, y: graphY - node.y! };
       setDragNodeId(node.id);
 
-      // Reheat the simulation when dragging (like polymarket dragstarted)
       if (simRef.current) {
         simRef.current.alphaTarget(0.3).restart();
       }
@@ -370,7 +329,7 @@ export function ConceptGraph({
     [viewTransform, width, height],
   );
 
-  // Highlight logic
+  // ── Highlight logic ─────────────────────────────────────
   const highlightNodeId = hoveredNode ?? selectedNode;
   const connectedEdgeKeys = new Set<string>();
   const connectedNodeIds = new Set<string>();
@@ -401,50 +360,20 @@ export function ConceptGraph({
       onWheel={handleWheel}
     >
       <defs>
-        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur stdDeviation="4" result="coloredBlur" />
+        <filter id="node-glow" x="-80%" y="-80%" width="260%" height="260%">
+          <feGaussianBlur stdDeviation="6" result="blur" />
           <feMerge>
-            <feMergeNode in="coloredBlur" />
+            <feMergeNode in="blur" />
             <feMergeNode in="SourceGraphic" />
           </feMerge>
         </filter>
-        <filter id="glow-strong" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur stdDeviation="8" result="coloredBlur" />
+        <filter id="node-glow-strong" x="-80%" y="-80%" width="260%" height="260%">
+          <feGaussianBlur stdDeviation="10" result="blur" />
           <feMerge>
-            <feMergeNode in="coloredBlur" />
+            <feMergeNode in="blur" />
             <feMergeNode in="SourceGraphic" />
           </feMerge>
         </filter>
-
-        {(Object.keys(EDGE_COLORS) as EdgeType[]).map((type) => (
-          <marker
-            key={type}
-            id={`arrow-${type}`}
-            viewBox="0 0 10 10"
-            refX="10"
-            refY="5"
-            markerWidth={ARROW_SIZE}
-            markerHeight={ARROW_SIZE}
-            orient="auto-start-reverse"
-          >
-            <path
-              d="M 0 0 L 10 5 L 0 10 z"
-              fill={EDGE_COLORS[type]}
-              opacity={0.8}
-            />
-          </marker>
-        ))}
-        <marker
-          id="arrow-highlight"
-          viewBox="0 0 10 10"
-          refX="10"
-          refY="5"
-          markerWidth={ARROW_SIZE + 2}
-          markerHeight={ARROW_SIZE + 2}
-          orient="auto-start-reverse"
-        >
-          <path d="M 0 0 L 10 5 L 0 10 z" fill="white" opacity={0.9} />
-        </marker>
       </defs>
 
       <rect x={0} y={0} width={width} height={height} fill="transparent" />
@@ -452,65 +381,39 @@ export function ConceptGraph({
       <g
         transform={`translate(${viewTransform.x}, ${viewTransform.y}) scale(${viewTransform.scale})`}
       >
-        {/* Edges */}
+        {/* ── Edges ─────────────────────────────────────── */}
         {filteredEdges.map((edge) => {
           const sourceNode = nodeMap.get(edge.source);
           const targetNode = nodeMap.get(edge.target);
           if (!sourceNode || !targetNode) return null;
 
           const edgeKey = `${edge.source}-${edge.target}`;
-          const isHighlighted =
-            connectedEdgeKeys.size > 0 && connectedEdgeKeys.has(edgeKey);
+          const isHighlighted = connectedEdgeKeys.size > 0 && connectedEdgeKeys.has(edgeKey);
           const isDimmed = connectedEdgeKeys.size > 0 && !isHighlighted;
 
-          const sourceR = getNodeRadius(edge.source);
-          const targetR = getNodeRadius(edge.target);
-          const dx = targetNode.x! - sourceNode.x!;
-          const dy = targetNode.y! - sourceNode.y!;
-          const dist = Math.max(Math.sqrt(dx * dx + dy * dy), 1);
-          const ux = dx / dist;
-          const uy = dy / dist;
-          const x1 = sourceNode.x! + ux * (sourceR + 2);
-          const y1 = sourceNode.y! + uy * (sourceR + 2);
-          const x2 = targetNode.x! - ux * (targetR + ARROW_SIZE + 2);
-          const y2 = targetNode.y! - uy * (targetR + ARROW_SIZE + 2);
-          const strokeWidth = 1 + edge.strength * 4;
-          const dashLength = 6 + edge.strength * 4;
+          const edgeColor = EDGE_COLORS[edge.type];
+          const strokeW = 0.5 + edge.strength * 2;
 
           return (
             <g key={edgeKey}>
-              {/* Base line */}
               <line
-                x1={x1}
-                y1={y1}
-                x2={x2}
-                y2={y2}
-                stroke={isHighlighted ? "white" : "#374151"}
-                strokeWidth={isHighlighted ? strokeWidth + 1 : strokeWidth}
-                opacity={isDimmed ? 0.06 : isHighlighted ? 0.5 : 0.2}
-                markerEnd={`url(#arrow-${isHighlighted ? "highlight" : edge.type})`}
-              />
-              {/* Animated flow line */}
-              <line
-                x1={x1}
-                y1={y1}
-                x2={x2}
-                y2={y2}
-                stroke={isHighlighted ? "white" : EDGE_COLORS[edge.type]}
-                strokeWidth={Math.max(strokeWidth * 0.7, 1)}
-                strokeDasharray={`${dashLength} ${dashLength * 2}`}
-                strokeDashoffset={-animOffset * 2}
-                opacity={isDimmed ? 0.04 : isHighlighted ? 1 : 0.6}
-                className="pointer-events-none"
+                x1={sourceNode.x!}
+                y1={sourceNode.y!}
+                x2={targetNode.x!}
+                y2={targetNode.y!}
+                stroke={isHighlighted ? "#fff" : edgeColor}
+                strokeWidth={isHighlighted ? strokeW + 1 : strokeW}
+                opacity={isDimmed ? 0.04 : isHighlighted ? 0.7 : 0.25}
+                strokeDasharray={isHighlighted ? "5,5" : undefined}
               />
               {/* Hit area */}
               <line
-                x1={x1}
-                y1={y1}
-                x2={x2}
-                y2={y2}
+                x1={sourceNode.x!}
+                y1={sourceNode.y!}
+                x2={targetNode.x!}
+                y2={targetNode.y!}
                 stroke="transparent"
-                strokeWidth={12}
+                strokeWidth={14}
                 className="cursor-pointer"
                 onMouseEnter={() => setHoveredEdge(edgeKey)}
                 onMouseLeave={() => setHoveredEdge(null)}
@@ -519,25 +422,24 @@ export function ConceptGraph({
               {hoveredEdge === edgeKey && (
                 <g>
                   <rect
-                    x={(x1 + x2) / 2 - 70}
-                    y={(y1 + y2) / 2 - 14}
+                    x={(sourceNode.x! + targetNode.x!) / 2 - 70}
+                    y={(sourceNode.y! + targetNode.y!) / 2 - 14}
                     width={140}
                     height={28}
                     rx={6}
-                    fill="#1e1e2e"
+                    fill="#0f1535"
                     stroke="#2a3a5a"
                     strokeWidth={1}
                   />
                   <text
-                    x={(x1 + x2) / 2}
-                    y={(y1 + y2) / 2 + 4}
+                    x={(sourceNode.x! + targetNode.x!) / 2}
+                    y={(sourceNode.y! + targetNode.y!) / 2 + 4}
                     textAnchor="middle"
-                    fill="white"
-                    fontSize={11}
+                    fill="#e0e0e0"
+                    fontSize={10}
                     fontFamily="monospace"
                   >
-                    {edge.label || EDGE_TYPE_LABELS[edge.type]} (
-                    {(edge.strength * 100).toFixed(0)}%)
+                    {edge.label || EDGE_TYPE_LABELS[edge.type]}
                   </text>
                 </g>
               )}
@@ -545,19 +447,33 @@ export function ConceptGraph({
           );
         })}
 
-        {/* Nodes */}
+        {/* ── Nodes ─────────────────────────────────────── */}
         {simNodes.map((node) => {
-          const isHighlighted =
-            connectedNodeIds.size > 0 && connectedNodeIds.has(node.id);
+          const isHighlighted = connectedNodeIds.size > 0 && connectedNodeIds.has(node.id);
           const isDimmed = connectedNodeIds.size > 0 && !isHighlighted;
           const isSelected = selectedNode === node.id;
-          const isSearchMatch =
-            searchMatches.size > 0 && searchMatches.has(node.id);
+          const isHovered = hoveredNode === node.id;
+          const isSearchMatch = searchMatches.size > 0 && searchMatches.has(node.id);
           const isSearchDimmed = searchMatches.size > 0 && !isSearchMatch;
           const dim = isDimmed || isSearchDimmed;
           const lit = isHighlighted || isSearchMatch;
           const fillColor = CATEGORY_COLORS[node.category];
           const r = getNodeRadius(node.id);
+
+          // Polymarket style: solid fill, thin stroke
+          let stroke = "#2a3a5a";
+          let strokeW = 2;
+          let filter: string | undefined;
+
+          if (isSelected) {
+            stroke = "#ffd93d";
+            strokeW = 3;
+            filter = "url(#node-glow-strong)";
+          } else if (isHovered || lit) {
+            stroke = "#4da6ff";
+            strokeW = 3;
+            filter = "url(#node-glow)";
+          }
 
           return (
             <g
@@ -569,95 +485,55 @@ export function ConceptGraph({
               onMouseEnter={() => setHoveredNode(node.id)}
               onMouseLeave={() => setHoveredNode(null)}
             >
-              {/* Selection ring */}
-              {isSelected && (
+              {/* Search pulse */}
+              {isSearchMatch && (
                 <circle
                   r={r + 6}
                   fill="none"
-                  stroke="white"
-                  strokeWidth={2}
-                  opacity={0.6}
-                />
-              )}
-
-              {/* Search pulse ring */}
-              {isSearchMatch && (
-                <circle
-                  r={r + 8}
-                  fill="none"
                   stroke={fillColor}
                   strokeWidth={2}
-                  opacity={0.6}
-                  filter="url(#glow-strong)"
+                  opacity={0.5}
+                  filter="url(#node-glow-strong)"
                 >
                   <animate
                     attributeName="r"
-                    values={`${r + 6};${r + 12};${r + 6}`}
+                    values={`${r + 4};${r + 10};${r + 4}`}
                     dur="2s"
                     repeatCount="indefinite"
                   />
                   <animate
                     attributeName="opacity"
-                    values="0.6;0.2;0.6"
+                    values="0.5;0.15;0.5"
                     dur="2s"
                     repeatCount="indefinite"
                   />
                 </circle>
               )}
 
-              {/* Outer glow ring */}
-              <circle
-                r={r + 3}
-                fill="none"
-                stroke={fillColor}
-                strokeWidth={1.5}
-                opacity={dim ? 0.05 : lit ? 0.8 : 0.25}
-              />
-
-              {/* Main circle */}
+              {/* Main filled circle */}
               <circle
                 r={r}
-                fill="#111118"
-                stroke={fillColor}
-                strokeWidth={lit ? 2.5 : 2}
-                opacity={dim ? 0.2 : 1}
-                filter={lit ? "url(#glow)" : undefined}
-              />
-
-              {/* Inner color fill */}
-              <circle
-                r={r - 2}
                 fill={fillColor}
-                opacity={dim ? 0.03 : lit ? 0.2 : 0.12}
+                stroke={stroke}
+                strokeWidth={strokeW}
+                opacity={dim ? 0.15 : 1}
+                filter={filter}
               />
 
-              {/* Label */}
+              {/* Label — outside the node, below */}
               <text
                 textAnchor="middle"
-                dy={r >= 36 ? -3 : 1}
-                fill={dim ? "#2a2a3e" : "white"}
-                fontSize={r < 32 ? 10 : r < 40 ? 12 : 13}
-                fontWeight={lit ? 600 : 500}
+                dy={r + 14}
+                fill={dim ? "#1a2a4a" : "#c8d0e0"}
+                fontSize={11}
+                fontWeight={lit || isSelected ? 600 : 400}
                 fontFamily="system-ui, sans-serif"
+                style={{ pointerEvents: "none" }}
               >
-                {node.label.length > 16
-                  ? node.label.slice(0, 15) + "\u2026"
+                {node.label.length > 18
+                  ? node.label.slice(0, 17) + "\u2026"
                   : node.label}
               </text>
-
-              {/* Category sublabel */}
-              {r >= 32 && (
-                <text
-                  textAnchor="middle"
-                  dy={12}
-                  fill={dim ? "#1a1a24" : fillColor}
-                  fontSize={9}
-                  fontFamily="monospace"
-                  opacity={dim ? 0.1 : 0.6}
-                >
-                  {CATEGORY_LABELS[node.category].toUpperCase()}
-                </text>
-              )}
             </g>
           );
         })}
