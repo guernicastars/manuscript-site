@@ -374,6 +374,33 @@ export function ConceptGraph({
             <feMergeNode in="SourceGraphic" />
           </feMerge>
         </filter>
+
+        {/* Arrow markers — small, subtle */}
+        {(Object.keys(EDGE_COLORS) as EdgeType[]).map((type) => (
+          <marker
+            key={type}
+            id={`arrow-${type}`}
+            viewBox="0 0 8 6"
+            refX="8"
+            refY="3"
+            markerWidth={8}
+            markerHeight={6}
+            orient="auto-start-reverse"
+          >
+            <path d="M 0 0 L 8 3 L 0 6 z" fill={EDGE_COLORS[type]} opacity={0.6} />
+          </marker>
+        ))}
+        <marker
+          id="arrow-highlight"
+          viewBox="0 0 8 6"
+          refX="8"
+          refY="3"
+          markerWidth={9}
+          markerHeight={7}
+          orient="auto-start-reverse"
+        >
+          <path d="M 0 0 L 8 3 L 0 6 z" fill="white" opacity={0.8} />
+        </marker>
       </defs>
 
       <rect x={0} y={0} width={width} height={height} fill="transparent" />
@@ -394,17 +421,28 @@ export function ConceptGraph({
           const edgeColor = EDGE_COLORS[edge.type];
           const strokeW = 0.5 + edge.strength * 2;
 
+          // Shorten line so arrow sits at node edge
+          const targetR = getNodeRadius(edge.target);
+          const dx = targetNode.x! - sourceNode.x!;
+          const dy = targetNode.y! - sourceNode.y!;
+          const dist = Math.max(Math.sqrt(dx * dx + dy * dy), 1);
+          const ux = dx / dist;
+          const uy = dy / dist;
+          const x2 = targetNode.x! - ux * (targetR + 4);
+          const y2 = targetNode.y! - uy * (targetR + 4);
+
           return (
             <g key={edgeKey}>
               <line
                 x1={sourceNode.x!}
                 y1={sourceNode.y!}
-                x2={targetNode.x!}
-                y2={targetNode.y!}
+                x2={x2}
+                y2={y2}
                 stroke={isHighlighted ? "#fff" : edgeColor}
                 strokeWidth={isHighlighted ? strokeW + 1 : strokeW}
                 opacity={isDimmed ? 0.04 : isHighlighted ? 0.7 : 0.25}
                 strokeDasharray={isHighlighted ? "5,5" : undefined}
+                markerEnd={`url(#arrow-${isHighlighted ? "highlight" : edge.type})`}
               />
               {/* Hit area */}
               <line
