@@ -14,9 +14,9 @@ import {
 import type { ConceptNode, ConceptEdge, ConceptCategory, EdgeType } from "@/types/graph";
 import { CATEGORY_COLORS, EDGE_TYPE_LABELS } from "@/types/graph";
 
-// ── Polymarket-inspired sizing ──────────────────────────────
-const MIN_NODE_RADIUS = 8;
-const MAX_NODE_RADIUS = 30;
+// ── Hybrid sizing: bolder than Polymarket, high-tech feel ──
+const MIN_NODE_RADIUS = 12;
+const MAX_NODE_RADIUS = 36;
 const MIN_ZOOM = 0.3;
 const MAX_ZOOM = 3;
 
@@ -360,6 +360,7 @@ export function ConceptGraph({
       onWheel={handleWheel}
     >
       <defs>
+        {/* Ambient glow for lit/hovered nodes */}
         <filter id="node-glow" x="-80%" y="-80%" width="260%" height="260%">
           <feGaussianBlur stdDeviation="6" result="blur" />
           <feMerge>
@@ -367,15 +368,32 @@ export function ConceptGraph({
             <feMergeNode in="SourceGraphic" />
           </feMerge>
         </filter>
+        {/* Strong glow for selected/search matches */}
         <filter id="node-glow-strong" x="-80%" y="-80%" width="260%" height="260%">
-          <feGaussianBlur stdDeviation="10" result="blur" />
+          <feGaussianBlur stdDeviation="12" result="blur" />
+          <feMerge>
+            <feMergeNode in="blur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+        {/* Subtle outer halo for all non-dimmed nodes */}
+        <filter id="node-halo" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="4" result="blur" />
+          <feMerge>
+            <feMergeNode in="blur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+        {/* Edge glow for highlighted connections */}
+        <filter id="edge-glow" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur stdDeviation="3" result="blur" />
           <feMerge>
             <feMergeNode in="blur" />
             <feMergeNode in="SourceGraphic" />
           </feMerge>
         </filter>
 
-        {/* Arrow markers — small, subtle */}
+        {/* Arrow markers */}
         {(Object.keys(EDGE_COLORS) as EdgeType[]).map((type) => (
           <marker
             key={type}
@@ -387,7 +405,7 @@ export function ConceptGraph({
             markerHeight={6}
             orient="auto-start-reverse"
           >
-            <path d="M 0 0 L 8 3 L 0 6 z" fill={EDGE_COLORS[type]} opacity={0.6} />
+            <path d="M 0 0 L 8 3 L 0 6 z" fill={EDGE_COLORS[type]} opacity={0.7} />
           </marker>
         ))}
         <marker
@@ -399,7 +417,7 @@ export function ConceptGraph({
           markerHeight={7}
           orient="auto-start-reverse"
         >
-          <path d="M 0 0 L 8 3 L 0 6 z" fill="white" opacity={0.8} />
+          <path d="M 0 0 L 8 3 L 0 6 z" fill="white" opacity={0.9} />
         </marker>
       </defs>
 
@@ -419,29 +437,44 @@ export function ConceptGraph({
           const isDimmed = connectedEdgeKeys.size > 0 && !isHighlighted;
 
           const edgeColor = EDGE_COLORS[edge.type];
-          const strokeW = 0.5 + edge.strength * 2;
+          const strokeW = 0.8 + edge.strength * 2;
 
-          // Shorten line so arrow sits at node edge
+          // Shorten line so arrow sits at node edge (account for outer glow ring)
           const targetR = getNodeRadius(edge.target);
+          const sourceR = getNodeRadius(edge.source);
           const dx = targetNode.x! - sourceNode.x!;
           const dy = targetNode.y! - sourceNode.y!;
           const dist = Math.max(Math.sqrt(dx * dx + dy * dy), 1);
           const ux = dx / dist;
           const uy = dy / dist;
-          const x2 = targetNode.x! - ux * (targetR + 4);
-          const y2 = targetNode.y! - uy * (targetR + 4);
+          const x1 = sourceNode.x! + ux * (sourceR + 5);
+          const y1 = sourceNode.y! + uy * (sourceR + 5);
+          const x2 = targetNode.x! - ux * (targetR + 6);
+          const y2 = targetNode.y! - uy * (targetR + 6);
 
           return (
             <g key={edgeKey}>
+              {/* Glow layer for highlighted edges */}
+              {isHighlighted && (
+                <line
+                  x1={x1}
+                  y1={y1}
+                  x2={x2}
+                  y2={y2}
+                  stroke={edgeColor}
+                  strokeWidth={strokeW + 3}
+                  opacity={0.15}
+                  filter="url(#edge-glow)"
+                />
+              )}
               <line
-                x1={sourceNode.x!}
-                y1={sourceNode.y!}
+                x1={x1}
+                y1={y1}
                 x2={x2}
                 y2={y2}
                 stroke={isHighlighted ? "#fff" : edgeColor}
-                strokeWidth={isHighlighted ? strokeW + 1 : strokeW}
-                opacity={isDimmed ? 0.04 : isHighlighted ? 0.7 : 0.25}
-                strokeDasharray={isHighlighted ? "5,5" : undefined}
+                strokeWidth={isHighlighted ? strokeW + 0.8 : strokeW}
+                opacity={isDimmed ? 0.05 : isHighlighted ? 0.75 : 0.3}
                 markerEnd={`url(#arrow-${isHighlighted ? "highlight" : edge.type})`}
               />
               {/* Hit area */}
@@ -495,22 +528,22 @@ export function ConceptGraph({
           const isSearchDimmed = searchMatches.size > 0 && !isSearchMatch;
           const dim = isDimmed || isSearchDimmed;
           const lit = isHighlighted || isSearchMatch;
-          const fillColor = CATEGORY_COLORS[node.category];
+          const catColor = CATEGORY_COLORS[node.category];
           const r = getNodeRadius(node.id);
 
-          // Polymarket style: solid fill, thin stroke
-          let stroke = "#2a3a5a";
-          let strokeW = 2;
-          let filter: string | undefined;
+          // High-tech style: transparent inner + colored boundary + glow
+          let borderColor = catColor;
+          let borderWidth = 2.5;
+          let nodeFilter: string | undefined = dim ? undefined : "url(#node-halo)";
 
           if (isSelected) {
-            stroke = "#ffd93d";
-            strokeW = 3;
-            filter = "url(#node-glow-strong)";
+            borderColor = "#ffd93d";
+            borderWidth = 3.5;
+            nodeFilter = "url(#node-glow-strong)";
           } else if (isHovered || lit) {
-            stroke = "#4da6ff";
-            strokeW = 3;
-            filter = "url(#node-glow)";
+            borderColor = "#4da6ff";
+            borderWidth = 3;
+            nodeFilter = "url(#node-glow)";
           }
 
           return (
@@ -523,53 +556,79 @@ export function ConceptGraph({
               onMouseEnter={() => setHoveredNode(node.id)}
               onMouseLeave={() => setHoveredNode(null)}
             >
-              {/* Search pulse */}
+              {/* Outer glow ring — always present on non-dimmed nodes */}
+              {!dim && (
+                <circle
+                  r={r + 4}
+                  fill="none"
+                  stroke={catColor}
+                  strokeWidth={1.5}
+                  opacity={isSelected ? 0.6 : isHovered || lit ? 0.45 : 0.2}
+                  filter={nodeFilter}
+                />
+              )}
+
+              {/* Search pulse animation */}
               {isSearchMatch && (
                 <circle
                   r={r + 6}
                   fill="none"
-                  stroke={fillColor}
+                  stroke={catColor}
                   strokeWidth={2}
                   opacity={0.5}
                   filter="url(#node-glow-strong)"
                 >
                   <animate
                     attributeName="r"
-                    values={`${r + 4};${r + 10};${r + 4}`}
+                    values={`${r + 4};${r + 12};${r + 4}`}
                     dur="2s"
                     repeatCount="indefinite"
                   />
                   <animate
                     attributeName="opacity"
-                    values="0.5;0.15;0.5"
+                    values="0.5;0.1;0.5"
                     dur="2s"
                     repeatCount="indefinite"
                   />
                 </circle>
               )}
 
-              {/* Main filled circle */}
+              {/* Transparent inner fill with color wash */}
               <circle
                 r={r}
-                fill={fillColor}
-                stroke={stroke}
-                strokeWidth={strokeW}
-                opacity={dim ? 0.15 : 1}
-                filter={filter}
+                fill={catColor}
+                opacity={dim ? 0.06 : 0.12}
+              />
+
+              {/* Colored border ring — the bold transparent boundary */}
+              <circle
+                r={r}
+                fill="none"
+                stroke={borderColor}
+                strokeWidth={borderWidth}
+                opacity={dim ? 0.1 : isSelected ? 1 : isHovered || lit ? 0.9 : 0.7}
+                filter={nodeFilter}
+              />
+
+              {/* Small bright core dot */}
+              <circle
+                r={Math.max(r * 0.2, 2.5)}
+                fill={catColor}
+                opacity={dim ? 0.1 : 0.8}
               />
 
               {/* Label — outside the node, below */}
               <text
                 textAnchor="middle"
-                dy={r + 14}
-                fill={dim ? "#1a2a4a" : "#c8d0e0"}
+                dy={r + 16}
+                fill={dim ? "#1a2a4a" : lit || isSelected ? "#e8eaf0" : "#9aa0b8"}
                 fontSize={11}
                 fontWeight={lit || isSelected ? 600 : 400}
                 fontFamily="system-ui, sans-serif"
                 style={{ pointerEvents: "none" }}
               >
-                {node.label.length > 18
-                  ? node.label.slice(0, 17) + "\u2026"
+                {node.label.length > 20
+                  ? node.label.slice(0, 19) + "\u2026"
                   : node.label}
               </text>
             </g>
