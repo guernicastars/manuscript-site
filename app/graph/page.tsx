@@ -15,9 +15,9 @@ import {
   RotateCcw,
 } from "lucide-react";
 import { ConceptGraph, EDGE_COLORS } from "@/components/ConceptGraph";
-import { NODES, EDGES } from "@/lib/graph-data";
+import { NODES, EDGES, getCoreNodes, getCoreEdges } from "@/lib/graph-data";
 import { CATEGORY_COLORS, CATEGORY_LABELS, EDGE_TYPE_LABELS } from "@/types/graph";
-import type { ConceptCategory, EdgeType, ConceptNode } from "@/types/graph";
+import type { ConceptCategory, EdgeType, ConceptNode, GraphMode } from "@/types/graph";
 
 // ── Graph metrics ────────────────────────────────────────
 
@@ -53,6 +53,7 @@ export default function GraphPage() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [selectedNode, setSelectedNode] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
+  const [graphMode, setGraphMode] = useState<GraphMode>("core");
   const [enabledCategories, setEnabledCategories] = useState<Set<ConceptCategory>>(
     new Set(["thinker", "framework", "concept", "diagnosis", "theological", "crisis"]),
   );
@@ -60,6 +61,15 @@ export default function GraphPage() {
     new Set(["builds_on", "applies_to", "formalizes", "critiques", "synthesizes"]),
   );
   const [viewTransform, setViewTransform] = useState({ x: 0, y: 0, scale: 1 });
+
+  const activeNodes = useMemo(
+    () => (graphMode === "core" ? getCoreNodes() : NODES),
+    [graphMode],
+  );
+  const activeEdges = useMemo(
+    () => (graphMode === "core" ? getCoreEdges() : EDGES),
+    [graphMode],
+  );
 
   const toggleCategory = useCallback((cat: ConceptCategory) => {
     setEnabledCategories((prev) => {
@@ -79,44 +89,44 @@ export default function GraphPage() {
     });
   }, []);
 
-  const components = useMemo(() => computeComponents(NODES, EDGES), []);
-  const avgDegree = ((EDGES.length * 2) / Math.max(NODES.length, 1)).toFixed(1);
+  const components = useMemo(() => computeComponents(activeNodes, activeEdges), [activeNodes, activeEdges]);
+  const avgDegree = ((activeEdges.length * 2) / Math.max(activeNodes.length, 1)).toFixed(1);
   const density = (
-    (2 * EDGES.length) /
-    Math.max(NODES.length * (NODES.length - 1), 1)
+    (2 * activeEdges.length) /
+    Math.max(activeNodes.length * (activeNodes.length - 1), 1)
   ).toFixed(3);
 
   const selectedNodeData = useMemo(() => {
     if (!selectedNode) return null;
-    return NODES.find((n) => n.id === selectedNode) ?? null;
-  }, [selectedNode]);
+    return activeNodes.find((n) => n.id === selectedNode) ?? null;
+  }, [selectedNode, activeNodes]);
 
   const selectedOutgoing = useMemo(() => {
     if (!selectedNode) return [];
-    return EDGES.filter((e) => e.source === selectedNode);
-  }, [selectedNode]);
+    return activeEdges.filter((e) => e.source === selectedNode);
+  }, [selectedNode, activeEdges]);
 
   const selectedIncoming = useMemo(() => {
     if (!selectedNode) return [];
-    return EDGES.filter((e) => e.target === selectedNode);
-  }, [selectedNode]);
+    return activeEdges.filter((e) => e.target === selectedNode);
+  }, [selectedNode, activeEdges]);
 
   const nodeById = useMemo(() => {
     const map = new Map<string, ConceptNode>();
-    for (const n of NODES) map.set(n.id, n);
+    for (const n of activeNodes) map.set(n.id, n);
     return map;
-  }, []);
+  }, [activeNodes]);
 
   // Search match count for sidebar display
   const searchMatchCount = useMemo(() => {
     if (!searchQuery.trim()) return 0;
     const q = searchQuery.toLowerCase();
-    return NODES.filter(
+    return activeNodes.filter(
       (n) =>
         n.label.toLowerCase().includes(q) ||
         (n.description || "").toLowerCase().includes(q),
     ).length;
-  }, [searchQuery]);
+  }, [searchQuery, activeNodes]);
 
   const zoomIn = () =>
     setViewTransform((prev) => ({
@@ -148,11 +158,36 @@ export default function GraphPage() {
               Graph Metrics
             </div>
             <div className="space-y-2">
-              <StatRow label="Concepts" value={NODES.length} />
-              <StatRow label="Relationships" value={EDGES.length} />
+              <StatRow label="Concepts" value={activeNodes.length} />
+              <StatRow label="Relationships" value={activeEdges.length} />
               <StatRow label="Avg Degree" value={avgDegree} />
               <StatRow label="Density" value={density} />
               <StatRow label="Components" value={components} />
+            </div>
+          </div>
+
+          {/* Graph Mode Toggle */}
+          <div>
+            <div className="text-[11px] uppercase tracking-[1.5px] text-[#888] font-semibold mb-3">
+              Graph Density
+            </div>
+            <div className="flex rounded-md overflow-hidden border border-[#2a3a5a]">
+              {(["core", "expanded"] as const).map((mode) => (
+                <button
+                  key={mode}
+                  onClick={() => {
+                    setGraphMode(mode);
+                    setSelectedNode(null);
+                  }}
+                  className={`flex-1 px-3 py-1.5 text-xs font-mono uppercase tracking-wider transition-colors ${
+                    graphMode === mode
+                      ? "bg-[#4da6ff] text-[#0a0e27] font-semibold"
+                      : "bg-[#1a2a4a] text-[#6b7280] hover:text-[#a0a0a0]"
+                  }`}
+                >
+                  {mode}
+                </button>
+              ))}
             </div>
           </div>
 
@@ -196,7 +231,7 @@ export default function GraphPage() {
             <div className="space-y-1">
               {(Object.keys(CATEGORY_COLORS) as ConceptCategory[]).map((cat) => {
                 const enabled = enabledCategories.has(cat);
-                const count = NODES.filter((n) => n.category === cat).length;
+                const count = activeNodes.filter((n) => n.category === cat).length;
                 return (
                   <button
                     key={cat}
@@ -230,7 +265,7 @@ export default function GraphPage() {
             <div className="space-y-1">
               {(Object.keys(EDGE_COLORS) as EdgeType[]).map((type) => {
                 const enabled = enabledEdgeTypes.has(type);
-                const count = EDGES.filter((e) => e.type === type).length;
+                const count = activeEdges.filter((e) => e.type === type).length;
                 return (
                   <button
                     key={type}
@@ -304,8 +339,8 @@ export default function GraphPage() {
       {/* ── Graph SVG ────────────────────────────────── */}
       <div className="flex-1 min-w-0">
         <ConceptGraph
-          nodes={NODES}
-          edges={EDGES}
+          nodes={activeNodes}
+          edges={activeEdges}
           enabledCategories={enabledCategories}
           enabledEdgeTypes={enabledEdgeTypes}
           searchQuery={searchQuery}

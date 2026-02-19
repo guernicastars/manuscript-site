@@ -19,11 +19,14 @@ export interface ConceptNode {
   description?: string;
   category: ConceptCategory;
   chapters: string[]; // slugs of chapters where this concept appears
+  core?: boolean; // true = appears in core graph view
   x?: number;
   y?: number;
   vx?: number;
   vy?: number;
 }
+
+export type GraphMode = "core" | "expanded";
 
 export interface ConceptEdge {
   source: string;
