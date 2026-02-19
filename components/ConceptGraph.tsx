@@ -610,13 +610,6 @@ export function ConceptGraph({
                 filter={nodeFilter}
               />
 
-              {/* Small bright core dot */}
-              <circle
-                r={Math.max(r * 0.2, 2.5)}
-                fill={catColor}
-                opacity={dim ? 0.1 : 0.8}
-              />
-
               {/* Label — outside the node, below */}
               <text
                 textAnchor="middle"
