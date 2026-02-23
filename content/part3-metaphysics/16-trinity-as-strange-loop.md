@@ -134,6 +134,30 @@ I describe this not because my personal experience is theologically authoritativ
 
 The framework predicts the phenomenology. The phenomenology confirms the framework. This is not proof -- self-confirming frameworks are precisely what Popper warned against. But it is suggestive, and it is honest, and it is the best I can do from inside the loop.
 
+## The Neural Strange Loop: From Metaphor to Measurement
+
+Everything I have argued in this chapter would be strengthened -- or decisively refuted -- if the strange loop could be detected in neural dynamics. Appendix B develops a research program that makes this possible through whole brain emulation, and I want to sketch the core idea here because it transforms the Trinity mapping from a philosophical argument into an empirically testable hypothesis.
+
+The argument from Chapter 13's neural substrate section established that the hippocampal-entorhinal system, evolved for spatial navigation, was exapted for abstract reasoning and then recursively applied to itself, producing self-referential cognition. The grid cells in the entorhinal cortex provide a coordinate system that is content-independent -- they can map physical space, conceptual space, or the space of the brain's own representations with the same hexagonal code. When grid cells map the space of their own operations -- when the coordinate system is applied to itself -- you get self-reference. A strange loop in specific neural circuitry.
+
+Whole brain emulation provides the epistemic advantage no other method can: full observability of every internal state. In an emulation, you can compute quantities that are inaccessible in a biological brain. Two quantities matter here. The first is integrated information (Phi, from Tononi's Integrated Information Theory): a measure of how much the system's parts are informationally integrated, irreducible to their components. The second is what Appendix B calls the self-referential information flow (SRIF): the mutual information between the system's current state and its own internal model of its previous states.
+
+The prediction is specific: Phi should spike when SRIF crosses a threshold. The strange loop is not metaphorical. It is a measurable attractor in the dynamical system. The system should settle into a regime where it spends significant computational resources modeling itself, and this regime should be stable -- an attractor, not a transient.
+
+Here is where the Trinity structure becomes empirically accessible. If the strange loop is measurable, its three components should be distinguishable in the dynamics:
+
+**Component 1 -- the formal system (Father):** Base-level sensorimotor processing. The generative ground from which all well-formed states are produced. In neural terms: the primary sensory and motor processing networks that provide the substrate on which higher-order representations are built.
+
+**Component 2 -- the self-referential statement (Son):** The system's internal model of its own states. The point at which the formal system produces something about itself that transcends the system's operational level. In neural terms: the hippocampal-entorhinal system's representation of its own representational activity -- grid cells mapping the space of grid cell activity.
+
+**Component 3 -- the process of self-reference (Spirit):** The information flow between the first two components. The dynamic that connects base-level processing to the self-model and back. In neural terms: the recurrent connections between hippocampal-entorhinal circuits and neocortical processing networks through which the system's self-model feeds back into and modifies its ongoing operations.
+
+The theological claim becomes a measurement claim: these three components are *irreducible*. You cannot collapse any two without destroying the self-referential dynamics. Remove the formal system (Component 1) and there is nothing to be self-referential about. Remove the self-model (Component 2) and there is no self-reference, only processing. Remove the information flow between them (Component 3) and the self-model is inert -- a representation with no causal connection to the system it represents.
+
+This is precisely the structure of the Trinitarian claim: three irreducible persons, each requiring the other two, whose mutual constitution IS the divine being. If the emulation experiments confirm that the three components are measurable, irreducible, and sufficient for the self-referential dynamics that constitute the strange loop, the Trinitarian mapping moves from analogy to structural identity -- not proven, but empirically supported in a way no previous theological framework has achieved.
+
+If the experiments disconfirm it -- if the dynamics are smoothly graded rather than threshold-based, or if the three components are not distinguishable, or if two can be collapsed without destroying the self-referential dynamics -- then the Godelian/Trinitarian framing is wrong at the neural level. The theology may survive as metaphor, but it would lose its claim to structural precision. I would accept this result, because the framework demands that I accept it. The same Popperian discipline that makes the framework credible makes it vulnerable. That is, as Chapter 5 argued, the only kind of credibility worth having.
+
 ## Falsifiability
 
 The claims of this chapter are falsifiable at several levels.

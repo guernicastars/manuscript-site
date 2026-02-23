@@ -202,16 +202,52 @@ Free will is the strange loop's capacity to generate Godelian truths -- choices 
 
 ---
 
-## A.7 Open Questions and Limitations
+## A.7 The Complex Variable Operationalized: z = x + iy
+
+Chapter 20 raised the question: what is the complex variable z? This appendix can now provide a specific answer, developed in conjunction with Appendix B's neural substrate hypothesis.
+
+The complex variable z = x + iy decomposes into two real components:
+
+**The real axis x: extensive complexity.** How much of reality a civilization can model. Operationalized through:
+- Scientometric output (publications, patents, R&D expenditure as fraction of GDP)
+- V-Dem institutional capacity scores (state capacity, bureaucratic quality, rule of law)
+- Technological reach (energy consumption per capita, computational capacity, network connectivity)
+- Multilingual embedding analysis (the dimensionality of the semantic spaces a civilization's languages can represent)
+
+x increases when a civilization extends its modeling capacity outward -- more phenomena observed, more systems understood, more technologies deployed. x is the domain of the merchant function (Chapter 25).
+
+**The imaginary axis y: intensive reflexivity.** How deeply a civilization models itself modeling reality. Operationalized through:
+- Recursion depth in public discourse (proportion of discourse that is meta-cognitive: discourse about discourse, thinking about thinking)
+- Moral scope (the range of entities included in the civilization's circle of moral concern -- Singer's expanding circle)
+- Second-order institutional density (institutions whose function is to evaluate, correct, and reform other institutions -- supreme courts, ombudsmen, independent media, peer review)
+- Error-correction cycle speed (how quickly a civilization can identify and correct its own systematic errors)
+
+y increases when a civilization deepens its self-referential capacity -- more sophisticated self-monitoring, more layers of institutional self-correction, greater capacity for counterfactual reasoning about its own structures. y is the domain of the philosopher-king function (Chapter 25).
+
+**The neural grounding (Appendix B):** The imaginary axis y is grounded in the hippocampal-entorhinal system's capacity for recursive self-referential simulation. Grid cells in the entorhinal cortex provide content-independent coordinate systems that can map any structured space, including the space of the brain's own representations. The four levels of hippocampal recursion (external world → self in world → counterfactual selves → the process of counterfactual reasoning itself) correspond to increasing y. The meaning crisis diagnosis -- x'(t) > 0 and y'(t) $\leq$ 0 -- corresponds to a civilization that is expanding its extensive modeling capacity while atrophying the neural and institutional architecture of reflexive depth.
+
+**The derivative revisited.** On the complex plane, the derivative f'(z) is itself a complex number, encoding both rate and direction of change. In the operationalized framework:
+
+$$f'(z) = \frac{dx}{dt} + i\frac{dy}{dt}$$
+
+The theology's falsifiability criterion (Chapter 20) becomes: is the trajectory's derivative pointing toward the point at infinity? This decomposes into two measurable questions: (1) Is extensive complexity increasing? (dx/dt > 0) -- almost certainly yes, in most historical periods. (2) Is intensive reflexivity increasing? (dy/dt > 0) -- the contested question, and the one where the meaning crisis diagnosis suggests the derivative may have turned negative.
+
+A civilization with dx/dt > 0 and dy/dt > 0 is approaching the point at infinity -- growing in both capability and wisdom. A civilization with dx/dt > 0 and dy/dt $\leq$ 0 is moving along the real axis -- becoming more powerful without becoming more self-aware. The current condition of the developed world, on this analysis, is the latter.
+
+---
+
+## A.8 Open Questions and Limitations
 
 This appendix has developed the mathematical structures that the theology draws on. Several open questions must be acknowledged:
 
-1. **Is the Riemann sphere mapping structural or illustrative?** Where does the analogy between complex analysis and theological claims carry genuine formal weight, and where does it merely provide evocative metaphor? The derivative/free-will mapping carries formal weight (it specifies a testable relationship between structure and choice). The singularity/crucifixion mapping may be primarily illustrative. Distinguishing these requires further formal development.
+1. **Is the Riemann sphere mapping structural or illustrative?** Where does the analogy between complex analysis and theological claims carry genuine formal weight, and where does it merely provide evocative metaphor? The derivative/free-will mapping carries formal weight (it specifies a testable relationship between structure and choice). The singularity/crucifixion mapping may be primarily illustrative. Distinguishing these requires further formal development. Appendix B's brain emulation program (Hypothesis E5) provides a direct test: if perturbation recovery dynamics cluster into exactly three types corresponding to the three singularity types, the mapping is structural.
 
-2. **Does strong emergence exist?** The information-theoretic formalization above specifies conditions for strong emergence, but whether those conditions are satisfied by consciousness remains empirically open. If consciousness is weakly emergent (fully reducible to neural activity), the theological claim that God is a strongly emergent property of consciousness loses its foundation.
+2. **Does strong emergence exist?** The information-theoretic formalization above specifies conditions for strong emergence, but whether those conditions are satisfied by consciousness remains empirically open. If consciousness is weakly emergent (fully reducible to neural activity), the theological claim that God is a strongly emergent property of consciousness loses its foundation. Appendix B's Hypothesis E1 (the Godelian threshold) provides a test: if whole brain emulation reveals a sharp phase transition in self-referential dynamics as a function of architectural complexity, this supports the strong emergence claim.
 
 3. **Is the free energy principle a theory of everything or a useful framework?** Friston's framework is mathematically powerful but its empirical status is debated. If it turns out to be unfalsifiable (a framework that accommodates any outcome) rather than falsifiable (a theory that makes specific predictions), then the theological applications built on it inherit the same weakness.
 
-4. **Can Godelian self-reference ground free will?** The Hofstadter argument is suggestive but not conclusive. Godel's theorem applies to formal systems, and whether the brain is usefully modeled as a formal system in the relevant sense is contested. The argument's strength lies in its formal structure; its weakness lies in the gap between formal systems and physical brains.
+4. **Can Godelian self-reference ground free will?** The Hofstadter argument is suggestive but not conclusive. Godel's theorem applies to formal systems, and whether the brain is usefully modeled as a formal system in the relevant sense is contested. The argument's strength lies in its formal structure; its weakness lies in the gap between formal systems and physical brains. Appendix B's grid code hypothesis (H2) and strange loop signature (E4) provide partial tests: if grid code disruption specifically impairs metacognition, and if the strange loop's three components are measurably irreducible in emulated neural dynamics, the gap between formal systems and physical brains narrows considerably.
+
+5. **What is the neural substrate of the imaginary axis?** Appendix B proposes the hippocampal-entorhinal system, grounded in the exaptation from spatial navigation to abstract self-referential reasoning. Eight hypotheses (H1--H3, E1--E5) test this proposal across timescales from six months to five years. The operationalization of z = x + iy (Section A.7) depends on this hypothesis for its neural grounding; if the hypothesis fails, z remains a useful institutional index but loses its connection to specific neural circuitry.
 
 These limitations are not fatal to the theology. They are the points at which the theology is most vulnerable to falsification -- which is, by the Popperian criterion of Chapter 5, where its integrity is strongest. A theology that acknowledges where it might be wrong is more trustworthy than one that claims certainty everywhere.
